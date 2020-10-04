@@ -14,9 +14,17 @@ int main (void) {
 
     (*depois).hora = 20; // primeira opção para utilizar o ponteiro com estruturas
     depois->minuto = 30;// segunda opção para utilizar o ponteiro com estruturas
-    depois->segundo = 40;
+    depois->segundo = 50;
 
-    printf("%i:%i:%i", agora.hora, agora.minuto, agora.segundo);
+    int somatorio = 100;
+
+    struct horario antes;
+
+    antes.hora = somatorio + (depois->segundo);
+    antes.minuto = agora.hora + depois->minuto;
+    antes.segundo = depois->minuto - depois->segundo;
+
+    printf("%i:%i:%i", antes.hora, antes.minuto, antes.segundo);
 
     return 0;
 
