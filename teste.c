@@ -1,52 +1,33 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main(void){
+int main (void){
 
-    _Bool stringsIguais(char s1[], char s2[]);
+    //======== INSERTION SORT ==============
 
+    //DETERMINAR A FUNÇÃO DE CRESCIMENTO TEMPORAL PARA O MÉTODO DE ORDENAÇÃO INSERTION SORT PARA "n" ELEMENTOS DO  
+    //VETOR "v";
 
-    stringsIguais("casa", "cara");
+    //CONSIDERAR: 
+    //VETOR CRESCENTE (TAMANHO VARIÁVEL) COMO MELHOR CASO;
+    //VETOR DESCRESCENTE (TAMANHO VARIÁVEL) COMO PIOR CASO;
+    //[90,12,18,83,24,71,67,35,58,40] COMO CASO MÉDIO.
 
+    int n;
+    int v[10]={2,8,6,9,5,3,1,4,7};
+
+    for (int i = 1; i < 10; i++)
+    {
+        int j = i - 1;
+        while ((j >= 0) && (v[i] < v[j]))
+        {
+            v[j + 1] = v[j];
+            j = j - 1;
+        }
+        v[j + 1] = v[i];
+        printf("%i ", v[i]);
+    }
     
 
     return 0;
 }
-
-_Bool stringsIguais(char s1[], char s2[]){
-
-   int num1Caracteres = 0;
-   int num2Caracteres = 0;
-
-   while (s1[num1Caracteres] != '\0')
-   {
-       ++num1Caracteres;
-   }
-    
-   while (s2[num2Caracteres] != '\0')
-   {
-       ++num2Caracteres;
-   }
-    
-    if (num1Caracteres != num2Caracteres)
-    {
-        printf("As strings sao diferentes.\n");
-    }else
-    {
-        
-            for (int i = 0; i < num1Caracteres; i++)
-            {
-                if (s1[i] != s2[i])
-                {
-                    printf("As strings sao diferentes.\n");
-                }
-                
-                
-            }
-            
-    }
-    
-    
-
-}
-
-
