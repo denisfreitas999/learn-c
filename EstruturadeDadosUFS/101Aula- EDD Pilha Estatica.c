@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define MAXTAM 100
 
-typedef struct {
+typedef struct Pilha{
     int Item[MAXTAM];
     int Topo;
 } TPilha;

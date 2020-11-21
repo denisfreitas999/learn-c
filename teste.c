@@ -1,33 +1,110 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main (void){
+struct PilhaDinamica{
+    int valor;
+    struct PilhaDinamica *prox;
+};
 
-    //======== INSERTION SORT ==============
+struct PilhaDinamica *topo;
+int tamanhomaximo = 10;
 
-    //DETERMINAR A FUNÇÃO DE CRESCIMENTO TEMPORAL PARA O MÉTODO DE ORDENAÇÃO INSERTION SORT PARA "n" ELEMENTOS DO  
-    //VETOR "v";
+int pilhavazia ()
+{
+    if (topo == NULL)
+        return 1;
+    else
+        return 0;
+}
 
-    //CONSIDERAR: 
-    //VETOR CRESCENTE (TAMANHO VARIÁVEL) COMO MELHOR CASO;
-    //VETOR DESCRESCENTE (TAMANHO VARIÁVEL) COMO PIOR CASO;
-    //[90,12,18,83,24,71,67,35,58,40] COMO CASO MÉDIO.
+void inserir (int valor)
+{
+    struct PilhaDinamica *novo;
+    novo = (struct PilhaDinamica*) malloc (sizeof(struct PilhaDinamica));
+    novo->valor = valor;
+    novo->prox = topo;
+    topo = novo;
+}
 
-    int n;
-    int v[10]={2,8,6,9,5,3,1,4,7};
+void remover ()
+{
+    int removido;
+    struct PilhaDinamica *aux;
+    aux =  topo;
+    removido = topo->valor;
+    topo = topo->prox;
+    printf("\nO valor %d foi removido da pilha\n\n", removido);
+    free(aux);
+}
 
-    for (int i = 1; i < 10; i++)
+void listar ()
+{
+    struct PilhaDinamica *aux;
+    aux = topo;
+    printf("\nOs valores inseridos na pilha sao: ");
+    while(aux != NULL)
     {
-        int j = i - 1;
-        while ((j >= 0) && (v[i] < v[j]))
-        {
-            v[j + 1] = v[j];
-            j = j - 1;
-        }
-        v[j + 1] = v[i];
-        printf("%i ", v[i]);
+        printf("%d ", aux->valor);
+        aux = aux->prox;
     }
-    
+    printf("\n\n");
+}
 
-    return 0;
+void main()
+{
+    int opcao, valor, tamanhoatual;
+    topo = NULL;
+    opcao = 0;
+    tamanhoatual = 0;
+
+    while (opcao != 5)
+    {
+        printf("\nEscolha uma opcao:");
+        printf("\n1 - Inserir um valor na pilha");
+        printf("\n2 - Remover um valor da pilha");
+        printf("\n3 - Mostrar o topo da pilha");
+        printf("\n4 - Listar os elementos da pilha");
+        printf("\n5 - Sair do programa");
+        printf("\nOpcao escolhida: ");
+        scanf("%d",&opcao);
+        switch (opcao)
+        {
+        case 1:
+            if (tamanhoatual < tamanhomaximo)
+            {
+                printf("\nQual valor sera inserido na pilha: ");
+                scanf("%d",&valor);
+                printf("\n\n");
+                inserir(valor);
+                tamanhoatual++;
+            }
+            else
+                printf("\nPilha cheia - Nao foi possivel executar essa operacao\n\n");
+            break;
+
+        case 2:
+            if (pilhavazia()== 0)
+            {
+                remover();
+                tamanhoatual--;
+            }
+            else
+                printf("\nPilha vazia - Nao foi possivel executar essa operacao\n\n");
+            break;
+
+        case 3:
+            if (pilhavazia()== 0)
+                printf("\nO valor no topo da pilha eh: %d\n\n", topo->valor);
+            else
+                printf("\nPilha vazia - Nao foi possivel executar essa operacao\n\n");
+            break;
+
+        case 4:
+            if (pilhavazia()== 0)
+                listar();
+            else
+                printf("\nPilha vazia - Nao foi possivel executar essa operacao\n\n");
+            break;
+        }
+    }
 }
