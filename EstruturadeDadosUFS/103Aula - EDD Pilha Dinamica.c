@@ -38,7 +38,7 @@ void Pilha_Remove(){
         free(aux);
     }else
     {
-        printf("Pilha Vazia");
+        printf("Pilha Vazia\n");
     }   
 }
 
